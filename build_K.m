@@ -3,7 +3,7 @@ function K = build_K(M, M2, theta, kernel)
     for i = 1 : size(M, 1)
         for j = 1 : size(M2, 1)
             if strcmp(kernel, 'sqExp')%Squared exponential.
-                K(i, j) = sqExp(M(i, 1), M2(j, 1), theta, '');
+                K(i, j) = sq_exp(M(i, 1), M2(j, 1), theta, '');
             elseif strcmp(kernel, '1o2')
                 K(i, j) = matern(M(i, 1), M2(j, 1), theta(1), theta(2), '1o2');
             elseif strcmp(kernel, '3o2')
