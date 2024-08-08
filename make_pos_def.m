@@ -1,18 +1,18 @@
 function M2 = make_pos_def(M)
 %MAKEPOSDEF Takes a matrix and makes it positive definite. 
-    [eig_val, eig_vec] = eig(M);
-    min_val = min(diag(eig_vec));
+    [eig_vec, eig_val] = eig(M);
+    diag_eig_val = diag(eig_val);
+
+    min_val = min(diag_eig_val);
+    tol = 1e-10;
+
+    diag_eig_val(diag_eig_val < tol) = ...
+        diag_eig_val(diag_eig_val < tol) + 2 * abs(min_val);
     
-    for elem = 1 : size(eig_vec, 1)
-        if eig_vec(elem, elem) < 10^-10
-            eig_vec(elem, elem) = eig_vec(elem, elem) + 2 * abs(min_val);
-        else
-            if eig_vec(elem, elem) > 10^-10 && eig_vec(elem, elem) < 0.00001
-                eig_vec(elem, elem) = eig_vec(elem, elem) + abs(min_val);
-            end
-        end
-    end
-    
-    M2 = eig_val * eig_vec * eig_val';
+    diag_eig_val(diag_eig_val > tol & diag_eig_val < 1e-5) = ...
+        diag_eig_val(diag_eig_val > tol & diag_eig_val < 1e-5) + abs(min_val);
+
+    eig_val = diag(diag_eig_val);
+    M2 = eig_vec * eig_val * eig_vec';
 end
 
