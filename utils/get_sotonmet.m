@@ -11,6 +11,13 @@ function [X, Y, X_s, Y_s] = get_sotonmet()
 
     sotonmet(:, [1, 3]) = cellfun(@datenum, sotonmet(:, [1, 3]), 'UniformOutput', false);
 
+    % Make dates start at 0
+    date_a = cell2mat(sotonmet(:, 1));
+    date_b = cell2mat(sotonmet(:, 3));
+
+    sotonmet(:, 1) = num2cell(date_a - min(date_a));
+    sotonmet(:, 3) = num2cell(date_b - min(date_b));
+
     sotonmet(cellfun(@(x) all(ismissing(x)), sotonmet)) = {NaN};
     nan_rows = any(cellfun(@(x) isnan(x), sotonmet), 2);
     
@@ -26,8 +33,4 @@ function [X, Y, X_s, Y_s] = get_sotonmet()
     X = cell2mat(sotonmet);
     Y = X(:, Y_COL);
     X = X(:, TO_KEEP);
-
-    % Subtract first date from all dates
-    X = X - X(1,1);
-    X_s = X_s - X_s(1,1);
 

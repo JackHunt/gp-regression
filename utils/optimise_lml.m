@@ -1,21 +1,20 @@
 function [theta_opt, lml] = optimise_lml(X, Y, theta_init, kernel)
 %OPTIMISE_LML Optimize the hyperparameters.
     options = optimoptions('fminunc', ...
-        'Algorithm', 'trust-region', ...
-        'SpecifyObjectiveGradient', true);
-
-    theta = theta_init;
+        'Algorithm','trust-region', ...
+        'SpecifyObjectiveGradient', true, ...
+        'Display', 'iter', ...
+        'PlotFcn', 'optimplotfval');
 
     f = @(theta) combined_objective(X, Y, theta, kernel);
 
-    % Perform optimization
-    [theta_opt, lml] = fminunc(f, theta0, options);
+    [theta_opt, lml] = fminunc(f, theta_init, options);
 end
 
-function [lml, d_lml] = combined_objective(X, Y, theta, kernel)
-    % Build K
-    % lml
+function [lml, J] = combined_objective(X, Y, theta, kernel)
+    K = build_K(X, Y, theta, kernel);
+    lml = -log_marginal_likelihood(K, Y);
 
-    % Build gradk
-    % grad lml
+    J_K = build_K(X, Y, theta, kernel, true);
+    J = d_log_marginal_likelihood(K, Y, J_K);
 end
