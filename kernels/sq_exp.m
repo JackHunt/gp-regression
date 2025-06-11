@@ -10,6 +10,6 @@ function y = sq_exp(x1, x2, theta, jacobian)
     if jacobian
         y = sq_exp_jacobian(x1, x2, theta);
     else
-        y = (theta(2).^2) * exp(-((x1 - x2).^2) / (2 * theta(1).^2));
+        y = (theta(2)^2) * exp(-((x1 - x2).^2) / (2 * theta(1)^2));
     end
 end
