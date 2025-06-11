@@ -1,13 +1,16 @@
 %% Setup and load data.
 Setup;
-OPTIMISE = true;
+OPTIMISE = false;
 
 [X, Y, X_s, Y_s] = get_sotonmet();
 
 %% Hyperparameters.
-kernel = 'sqExp';
-theta = [0.075 0.6]';
-theta_labels = {'lambda' 'sigma'};
+%kernel = 'sqExp';
+kernel = '3o2';
+%theta = [1.0 1.0]';
+theta = [1.0 1.0]';
+%theta_labels = {'lambda' 'sigma'};
+theta_labels = {'lambda' 'omega'};
 
 %% GP Regression
 % Optimise hyperparams
