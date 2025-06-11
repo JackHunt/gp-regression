@@ -1,5 +1,5 @@
 function K = build_K(M, M2, theta, kernel, jacobian)
-%GETCOV Returns the covarince matrix of 2 given matrices.
+%GETCOV Returns the covarince matrix between 2 given matrices.
     arguments
         M;
         M2;
@@ -17,9 +17,9 @@ function K = build_K(M, M2, theta, kernel, jacobian)
     if strcmp(kernel, 'sqExp')
         K = sq_exp(M_rep, M2_rep, theta, jacobian);
     elseif strcmp(kernel, '1o2')
-        K = matern(M_rep, M2_rep, theta(1), theta(2), '1o2');
+        K = matern(M_rep, M2_rep, theta, '1o2', jacobian);
     elseif strcmp(kernel, '3o2')
-        K = matern(M_rep, M2_rep, theta(1), theta(2), '3o2');
+        K = matern(M_rep, M2_rep, theta, '3o2', jacobian);
     else
         error('Unknown kernel type.');
     end
