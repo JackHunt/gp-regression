@@ -15,4 +15,3 @@ function J = matern_jacobian(x1, x2, theta, type)
         error("Unknown matern kernel type.")
     end
 end
-
