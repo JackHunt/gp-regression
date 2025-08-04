@@ -1,6 +1,6 @@
 %% Setup and load data.
 Setup;
-OPTIMISE = false;
+OPTIMISE = true;
 
 [X, Y, X_s, Y_s] = get_sotonmet();
 
