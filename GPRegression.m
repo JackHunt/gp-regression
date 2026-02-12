@@ -1,13 +1,12 @@
 %% Setup and load data.
 Setup;
 OPTIMISE = true;
-
 [X, Y, X_s, Y_s] = get_sotonmet();
 
 %% Hyperparameters.
 kernel = 'sqExp';
-%kernel = '3o2';
-theta = [0.5 0.1]';
+%kernel = '5o2';
+theta = [0.14 1.6 0.5]';
 
 %% GP Regression
 % Optimise hyperparams
@@ -18,7 +17,6 @@ end
 
 % Calculate covariance matrices.
 K = build_K(X, X, theta, kernel);
-K = jitter_K(K);
 K_s = build_K(X, X_s, theta, kernel);
 K_ss = build_K(X_s, X_s, theta, kernel);
 

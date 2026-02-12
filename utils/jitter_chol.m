@@ -1,20 +1,18 @@
 function L = jitter_chol(K)
-    passed = false;
-    jitter = 1e-8;% * mean(diag(K));
+    jitter = 1e-8;
     L = 0;
-    while ~passed
+    while true
         if (jitter > 100000)
-            jitter
-            error('jitter_chol failed.');
+            sprintf("jitter_chol failed. Returning identity.")
+            L = eye(size(K));
             break
         end
         
         try
-            L = chol(K + jitter * eye(size(K)));
-            passed = true;
+            L = chol(K + jitter * eye(size(K)), "lower");
+            break
         catch ME
             jitter = jitter * 2;
-            passed = false;
         end
     end
 end
