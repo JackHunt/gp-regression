@@ -8,7 +8,8 @@ function [X, Y, X_s, Y_s] = get_sotonmet()
     sotonmet = readcell(fname);
     sotonmet = sotonmet(2:end, :);
 
-    sotonmet(:, [1, 3]) = cellfun(@datenum, sotonmet(:, [1, 3]), 'UniformOutput', false);
+    sotonmet(:, [1, 3]) = cellfun( ...
+        @datenum, sotonmet(:, [1, 3]), 'UniformOutput', false);
 
     % Make dates start at 0
     date_a = cell2mat(sotonmet(:, 1));
