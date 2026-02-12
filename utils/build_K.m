@@ -7,19 +7,13 @@ function K = build_K(M, M2, theta, kernel, jacobian)
         kernel;
         jacobian = false;
     end
-    
-    m = size(M, 1);
-    n = size(M2, 1);
-
-    M_rep = repmat(M(:, 1), 1, n);
-    M2_rep = repmat(M2(:, 1)', m, 1);
 
     if strcmp(kernel, 'sqExp')
-        K = sq_exp(M_rep, M2_rep, theta, jacobian);
-    elseif strcmp(kernel, '1o2')
-        K = matern(M_rep, M2_rep, theta, '1o2', jacobian);
+        K = sq_exp(M, M2, theta, jacobian);
     elseif strcmp(kernel, '3o2')
-        K = matern(M_rep, M2_rep, theta, '3o2', jacobian);
+        K = matern(M, M2, theta, '3o2', jacobian);
+    elseif strcmp(kernel, '5o2')
+        K = matern(M, M2, theta, '5o2', jacobian);
     else
         error('Unknown kernel type.');
     end

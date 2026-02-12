@@ -5,12 +5,9 @@ OPTIMISE = true;
 [X, Y, X_s, Y_s] = get_sotonmet();
 
 %% Hyperparameters.
-%kernel = 'sqExp';
-kernel = '3o2';
-%theta = [1.0 1.0]';
-theta = [1.0 1.0]';
-%theta_labels = {'lambda' 'sigma'};
-theta_labels = {'lambda' 'omega'};
+kernel = 'sqExp';
+%kernel = '3o2';
+theta = [0.5 0.1]';
 
 %% GP Regression
 % Optimise hyperparams

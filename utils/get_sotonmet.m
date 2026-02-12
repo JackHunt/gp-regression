@@ -1,7 +1,6 @@
 function [X, Y, X_s, Y_s] = get_sotonmet()
 %GET_SOTONMET Summary of this function goes here
     TO_KEEP = [3]; % Column ids to keep.
-    X_COL = 3;
     Y_COL = 6;
     LABEL_COL = 11;
 
