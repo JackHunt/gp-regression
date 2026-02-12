@@ -40,4 +40,4 @@ function [X, Y, X_s, Y_s] = get_sotonmet(pred_percent)
 
     X = X(1 : n_fit, :);
     Y = Y(1 : n_fit, :);
-
+end
